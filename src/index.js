@@ -9,7 +9,9 @@ const project = require('./compose/project');
 
 const config = _.merge(defaults, project, argv);
 
-config.pkg = require('./compose/pkg')(config);
+/**
+ * TODO: Can bundles be composed?
+ */
 config.file.bundle = require('./compose/bundle')(config);
 
 /**

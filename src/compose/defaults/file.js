@@ -1,7 +1,6 @@
 'use strict';
 
 const path = require('path');
-const pkgup = require('pkg-up');
 const argv = require('yargs').argv;
 
 const source = 'src';
@@ -17,6 +16,8 @@ const dest = argv.production ? dist : temp;
 const config = {};
 
 const directories = {
+
+	cwd: process.cwd(),
 
 	/**
 	 *  Application & Presentation
@@ -62,32 +63,15 @@ const directories = {
 	local: 'local_modules'
 };
 
-const cwd = process.cwd();
-const pkgPath = pkgup.sync(path.dirname(pkgup.sync(__dirname)));
-console.log('__dirname', __dirname);
-console.log('process.cwd()', process.cwd());
-console.log('pkgup.sync(__dirname)', pkgup.sync(__dirname));
-console.log('pkgup.sync()', pkgup.sync());
-console.log('pkgup.sync(.)', pkgup.sync('./'));
-console.log('pkgPath', pkgPath);
-console.log(require('findup-sync')('package.json'));
-const pkgRoot = path.dirname(pkgPath);
-
 // Good for webpack
 directories.absolute = Object.keys(directories)
 	.reduce((absolute, key) => {
 
-		absolute[key] = path.join(cwd, directories[key]);
+		absolute[key] = path.join(directories.cwd, directories[key]);
+
 		return absolute;
 
 	}, {});
-
-// Add objects so previous doesn't have to type check
-directories.cwd = cwd;
-directories.pkg = {
-	path: pkgPath,
-	root: pkgRoot
-};
 
 // Add file names
 Object.assign(config, directories, {

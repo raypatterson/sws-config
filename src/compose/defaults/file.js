@@ -11,13 +11,15 @@ const reports = 'reports';
 const dist = 'dist';
 const temp = '.tmp';
 const dump = path.join(source, '.dmp');
-const dest = argv.production ? dist : temp;
+const dest = argv.production || argv.p ? dist : temp;
 
-const config = {};
+// console.log('argv', argv);
+
+const config = {
+	cwd: process.cwd()
+};
 
 const directories = {
-
-	cwd: process.cwd(),
 
 	/**
 	 *  Application & Presentation
@@ -67,7 +69,7 @@ const directories = {
 directories.absolute = Object.keys(directories)
 	.reduce((absolute, key) => {
 
-		absolute[key] = path.join(directories.cwd, directories[key]);
+		absolute[key] = path.join(config.cwd, directories[key]);
 
 		return absolute;
 

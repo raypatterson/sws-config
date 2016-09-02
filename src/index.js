@@ -2,12 +2,12 @@
 
 const _ = require('lodash');
 const deepFreeze = require('deep-freeze');
-const argv = require('yargs').argv;
 
 const defaults = require('./compose/defaults');
-const project = require('./compose/project');
+const resource = require('./compose/resource');
+const commands = require('./compose/commands');
 
-const config = _.merge(defaults, project, argv);
+const config = _.merge(defaults, resource, commands);
 
 /**
  * TODO: Can bundles be composed?

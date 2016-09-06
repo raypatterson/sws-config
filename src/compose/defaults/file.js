@@ -10,7 +10,6 @@ const vendor = 'vendor';
 const reports = 'reports';
 const dist = 'dist';
 const temp = '.tmp';
-const dump = path.join(source, '.dmp');
 const dest = argv.production || argv.p ? dist : temp;
 
 // console.log('argv', argv);
@@ -37,8 +36,11 @@ const directories = {
 	// Build 'dest' sub directories
 	dist,
 	temp,
-	dump,
 	dest,
+
+	// Performance plugin directories
+	happypack: path.join(dest, '.happypack'),
+	cached: path.join(dest, '.cached'),
 
 	// Assets common to all app entry points
 	common,

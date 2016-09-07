@@ -13,8 +13,14 @@ const OPTIONS = {
 		description: 'Package for production.',
 		default: false
 	},
-	config: {
+	clean: {
 		alias: 'c',
+		name: 'clean',
+		description: 'Cleans "dist" directory.',
+		default: false
+	},
+	config: {
+		alias: 'rc',
 		name: 'config',
 		description: 'Specify config file name.',
 		default: 'fmw.config.js'
@@ -24,7 +30,7 @@ const OPTIONS = {
 const argv = require('yargs')
 	.usage('Usage: $ <command> [options]')
 	.command('fmw', 'Run Full Metal Webpack 🍹')
-	.example('$ fmw --debug --production --config fmw.config.file.js', 'Run in debug mode, package for production, specify config.')
+	.example('$ fmw --debug --production --clean --config fmw.config.file.js', 'Run in debug mode, clean dist, package for production, specify config file.')
 	/**
 	 * `--debug` or `-d`
 	 */
@@ -40,7 +46,14 @@ const argv = require('yargs')
 	.default(OPTIONS.production.alias, OPTIONS.production.default)
 	.describe(OPTIONS.production.alias, OPTIONS.production.description)
 	/**
-	 * `--config fmw.config.file.js` or `-c fmw.config.file.js`
+	 * `--clean` or `-c`
+	 */
+	.alias(OPTIONS.clean.alias, OPTIONS.clean.name)
+	.boolean(OPTIONS.clean.alias)
+	.default(OPTIONS.clean.name, OPTIONS.clean.default)
+	.describe(OPTIONS.clean.alias, OPTIONS.clean.description)
+	/**
+	 * `--config fmw.config.file.js` or `-rc fmw.config.file.js`
 	 */
 	.alias(OPTIONS.config.alias, OPTIONS.config.name)
 	.string(OPTIONS.config.alias)

@@ -1,13 +1,13 @@
 'use strict';
 
 const protocol = 'http';
-const domain = 'localhost';
+const host = 'localhost';
 const port = 8080;
-const url = `${protocol}://${domain}:${port}`;
+const url = `${protocol}://${host}:${port}`;
 
 const config = {
 	protocol,
-	domain,
+	host,
 	port,
 	url
 };

@@ -84,6 +84,7 @@ Object.assign(config, directories, {
 	extensions: {
 		js: 'js',
 		css: 'css',
+		sass: 'scss',
 		html: 'html',
 		tmpl: 'ejs'
 	}
